@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Sidebar from './components/Sidebar';
 import './App.css';
 function App() {
 
@@ -10,13 +11,12 @@ function App() {
   
   return (
     <div className="container">
-    <div id="sidebar">
-      <h2>Your Projects</h2>
-      <button id='addBtn' onClick={handleForm}>+ Add Project</button>
-    </div>
+    <Sidebar handleForm={handleForm}/>
     <div id="display">
-
-      {activeForm ? <div><h2>Form is here</h2></div> : <div><h2>No Project to show</h2></div> }
+    <img src="projectImg.png" alt="project icon"/>
+    <h2>No project selected</h2>
+    <p>Select a project or get stared with a new one</p>
+    <button id='createBtn'>Create Project</button>
     </div>
     </div>
   )
