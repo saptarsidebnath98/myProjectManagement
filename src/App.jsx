@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import Sidebar from './components/Sidebar';
+import DefaultDisplay from './components/DefaultDisplay';
+import ProjectForm from './components/ProjectForm';
 import './App.css';
 function App() {
 
   const [activeForm, setAcitveForm] = useState(false);
 
-  function handleForm(){
+  function handleFormOpen(){
       setAcitveForm(true);
+  }
+
+  function handleSubmit(){
+    setAcitveForm(false);
   }
   
   return (
     <div className="container">
-    <Sidebar handleForm={handleForm}/>
-    <div id="display">
-    <img src="projectImg.png" alt="project icon"/>
-    <h2>No project selected</h2>
-    <p>Select a project or get stared with a new one</p>
-    <button id='createBtn'>Create Project</button>
-    </div>
+    <Sidebar handleForm={handleFormOpen}/>
+    {activeForm ? <ProjectForm onSubmit={handleSubmit}/> : <DefaultDisplay/>}
     </div>
   )
 }
