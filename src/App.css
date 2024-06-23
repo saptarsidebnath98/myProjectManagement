@@ -114,7 +114,7 @@ body, html{
     font-size: 1.5rem;
 }
 
-#formDate{
+.formDate{
     width: 20rem;
     font-size: 1.5rem;
     padding: 0.5rem;

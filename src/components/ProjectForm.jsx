@@ -1,14 +1,33 @@
-export default function ProjectForm({onSubmit}) {
+import { useRef } from "react";
+import Input from "./Input";
+
+export default function ProjectForm({onAdd}) {
+
+  const title = useRef();
+  const description = useRef();
+  const dueDate = useRef();
+
+  function handleSave(){
+    
+    const enteredTitle = title.current.value;
+    const enteredDescription = description.current.value;
+    const enteredDueDate = dueDate.current.value;
+  
+    onAdd({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: enteredDueDate
+    })
+  }
+
+
   return (
     <div id="form">
       <form action="#">
-        <label htmlFor="">Title</label>
-        <input type="text" />
-        <label htmlFor="">Description</label>
-        <textarea type="text" rows={10}/>
-        <label htmlFor="">Due Date</label>
-        <input type="date" id="formDate"/>
-        <button id="saveBtn" onClick={onSubmit}>Save</button>
+        <Input ref={title} label="Title" type="text"/>
+        <Input ref={description} label="Description" textarea/>
+        <Input ref={dueDate} label="Due Date" type="date"/>
+        <button id="saveBtn" onClick={handleSave}>Save</button>
       </form>
     </div>
   )

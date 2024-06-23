@@ -5,22 +5,49 @@ import ProjectForm from './components/ProjectForm';
 import './App.css';
 function App() {
 
-  const [activeForm, setAcitveForm] = useState(false);
+  const [projectState, setProjectSate] = useState({
+    selectedProjectId: undefined,
+    projects: []
+  });
 
-  function handleFormOpen(){
-      setAcitveForm(true);
+  function handleStartAddProject(){
+    setProjectSate(prevState => {
+      return{
+        ...prevState,
+        selectedProjectId : null,
+      }
+    })
   }
 
-  function handleSubmit(){
-    setAcitveForm(false);
+  function handleAddProject(projectData){
+    setProjectSate(prevState => {
+      const newProject = {
+        ...projectData,
+        id: Math.random()
+      }
+      return{
+        ...prevState,
+        projects: [...prevState.projects, newProject]
+      }
+    })
+      
+  }
+
+  console.log(projectState);
+
+  let content;
+  if(projectState.selectedProjectId === null){
+    content = <ProjectForm onAdd={handleAddProject}/>
+  }else if(projectState.selectedProjectId === undefined ){
+    content = <DefaultDisplay onClick={handleStartAddProject}/>
   }
   
   return (
     <div className="container">
-    <Sidebar handleForm={handleFormOpen}/>
-    {activeForm ? <ProjectForm onSubmit={handleSubmit}/> : <DefaultDisplay/>}
+    <Sidebar onClick={handleStartAddProject}/>
+    {content}
     </div>
   )
 }
 
-export default App
+export default App;
